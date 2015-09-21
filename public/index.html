@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>一句</title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style type="text/css">
+    html,
+    body {
+        height: 100%;
+        color:#553A29;
+        background: #ccb785;
+        background: -moz-linear-gradient(top,  #ccb785 0%, #dac492 50%, #ccb785 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccb785), color-stop(50%,#dac492), color-stop(100%,#ccb785));
+        background: -webkit-linear-gradient(top,  #ccb785 0%,#dac492 50%,#ccb785 100%);
+        background: -o-linear-gradient(top,  #ccb785 0%,#dac492 50%,#ccb785 100%);
+        background: -ms-linear-gradient(top,  #ccb785 0%,#dac492 50%,#ccb785 100%);
+        background: linear-gradient(to bottom,  #ccb785 0%,#dac492 50%,#ccb785 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccb785', endColorstr='#ccb785',GradientType=0 );
+    }
+    </style>
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?365ce1fce9a468b2b77c10998834ddb9";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+</head>
+
+<body ng-app="myapp">
+    <div class="container-fluid" ng-view>
+        
+    </div>
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.4.5/angular.min.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.4.5/angular-route.min.js"></script>
+    <script type="text/javascript">
+    var myapp=angular.module("myapp",['ngRoute']);
+    myapp.config(function($routeProvider){
+        $routeProvider.
+        when('/',{controller:'main',templateUrl:'views/main.html'}).
+        when('/about',{controller:'about',templateUrl:'views/about.html'}).
+        otherwise({redirectTo:'/'});
+    });
+    myapp.controller("main",function($scope,$http){
+    	$scope.p={};
+		$scope.submit=function () {
+			$http.get('/one').success(function(one){
+				$scope.one=one;
+                $scope.one.lines=one.para.split("。");
+                $scope.one.line=$scope.one.lines[1];
+			});
+		}
+		$scope.showMore=function  () {
+			$scope.p.show=true;
+		}
+    });
+    myapp.controller("about",function($scope){
+
+    });
+    </script>
+</body>
+
+</html>
