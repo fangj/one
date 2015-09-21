@@ -52,6 +52,7 @@
     myapp.controller("main",function($scope,$http){
     	$scope.p={};
 		$scope.submit=function () {
+            $scope.p.show=false;
 			$http.get('/one').success(function(one){
 				$scope.one=one;
                 $scope.one.lines=one.para.split("。");
