@@ -47,23 +47,27 @@
         $routeProvider.
         when('/',{controller:'main',templateUrl:'views/main.html'}).
         when('/about',{controller:'about',templateUrl:'views/about.html'}).
+        when('/cover',{controller:'cover',templateUrl:'views/cover.html'}).
         otherwise({redirectTo:'/'});
     });
-    myapp.controller("main",function($scope,$http){
+    myapp.controller("main",function($rootScope,$scope,$http){
     	$scope.p={};
 		$scope.submit=function () {
             $scope.p.show=false;
 			$http.get('/one').success(function(one){
-				$scope.one=one;
+				$rootScope.one=one;
                 $scope.one.lines=one.para.split("。");
                 $scope.one.line=$scope.one.lines[1];
 			});
 		}
 		$scope.showMore=function  () {
 			$scope.p.show=true;
-		}
+		}        
     });
     myapp.controller("about",function($scope){
+
+    });
+    myapp.controller("cover",function($scope){
 
     });
     </script>

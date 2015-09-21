@@ -6,8 +6,9 @@
     </div>
 </form>
 <div ng-show="one.line">
-    <h2 class="text-center" style="font-family:serif;">{{one.line}}</h2>
+    <pre style="background-color: inherit;border:inherit;font-size: 1.5em">{{one.line}}</pre>
     <div style="text-align: center">
+        <a href="#/cover" class="btn btn-info btn-lg" style="margin-top: 40px">书籍</a>
         <input class="btn btn-info btn-lg" style="margin-top: 40px" type="submit" value="更多" ng-click="showMore()">
     </div>
     <div ng-show="p.show">
