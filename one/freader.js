@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-var fs=require("fs");
+var fs=require('fs');
 
 //文件信息
 var fileInfos={};
@@ -33,19 +33,19 @@ function buffer2String(buf){
 	}
 	//返回从第一个完整字头(包含)到最后一个字头(不包含)之间的字符串.
 	var buf2=buf.slice(first, last);
-	var str = buf2.toString("utf8");
+	var str = buf2.toString('utf8');
 	return str;
 }
 
 
 //取得一段字符串
 function getParagraph (path,position,length) {
-	var fd=fs.openSync(path, "r");
+	var fd=fs.openSync(path, 'r');
 	var buffer = new Buffer(length);
 	var bytesRead=fs.readSync(fd, buffer, 0, length, position);
 	fs.close(fd);
     var str=buffer2String(buffer.slice(0,bytesRead));
-    console.log(str);
+    //console.log(str);
 	return str;
 }
 
@@ -67,11 +67,39 @@ function getRandomParagraph(path){
 	}
 	var info=fileInfos[path];
 	var pos=Math.floor(Math.random()*info.len);
-	return getParagraph(path,pos,300);
+	return getParagraph(path,pos,1000);
 }
+
+var fileList = [];
+function walk(path){  
+    var dirList = fs.readdirSync(path);
+    dirList.forEach(function(item){
+        if(fs.statSync(path + '/' + item).isDirectory()){
+            walk(path + '/' + item);
+        }else{
+            fileList.push(path + '/' + item);
+        }
+    });
+}
+walk('./txt');
+console.log(fileList);  
+
+function collectTxtFileInfo(fileList){
+	for (var i = 0; i < fileList.length; i++) {
+		var path=fileList[i];
+		if(/txt$/.test(path)){
+			//console.log(path);
+			var info=getFileInfo(path);
+			fileInfos[path]=info;
+		}
+	}
+}
+collectTxtFileInfo(fileList);
+console.log(fileInfos);
 
 module.exports={
 	getFilesizeInBytes:getFilesizeInBytes,
 	getParagraph:getParagraph,
-	getFileInfo:getFileInfo
+	getFileInfo:getFileInfo,
+	getRandomParagraph:getRandomParagraph
 };

@@ -1,8 +1,8 @@
 "use strict";
 
 var freader=require("./freader");
-var size=freader.getFilesizeInBytes("./txt/全唐诗.txt");
-console.log("size",size);
+// var size=freader.getFilesizeInBytes("./txt/全唐诗.txt");
+// console.log("size",size);
 
 
 // freader.getParagraph("./txt/全唐诗.txt",67,100);
@@ -15,5 +15,8 @@ console.log("size",size);
 // freader.getParagraph("./txt/全唐诗.txt",170,10);
 
 // freader.getParagraph("./txt/全唐诗.txt",12193250,100);
-var info=freader.getFileInfo("./txt/全唐诗.txt");
-console.log(info);
+// var info=freader.getFileInfo("./txt/全唐诗.txt");
+// console.log(info);
+
+var randomP=freader.getRandomParagraph("./txt/全唐诗.txt");
+console.log(randomP);
