@@ -28,11 +28,8 @@ function buffer2String(buf){
 	 	last=pos;break;
 	 }
 	}
-	console.log(buf.toString("hex"));
-	console.log("first",first,"last",last);
-	//返回从第一个完整字到最后一个完整字之前的字符串.
+	//返回从第一个完整字头(包含)到最后一个字头(不包含)之间的字符串.
 	var buf2=buf.slice(first, last);
-	console.log(buf2.toString("hex"));
 	var str = buf2.toString("utf8");
 	return str;
 }
@@ -42,14 +39,11 @@ function buffer2String(buf){
 function getParagraph (path,position,length) {
 	var fd=fs.openSync(path, "r");
 	var buffer = new Buffer(length);
-	fs.readSync(fd, buffer, 0, length, position);
+	var bytesRead=fs.readSync(fd, buffer, 0, length, position);
 	fs.close(fd);
-	var data = buffer.toString("utf8", 0, buffer.length);
-    console.log(data);
-    var str=buffer2String(buffer);
-    console.log("str",str);
-    console.log(" ");
-	return buffer;
+    var str=buffer2String(buffer.slice(0,bytesRead));
+    console.log(str);
+	return str;
 }
 
 module.exports={
