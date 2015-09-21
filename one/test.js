@@ -18,5 +18,9 @@ var freader=require("./freader");
 // var info=freader.getFileInfo("./txt/全唐诗.txt");
 // console.log(info);
 
-var randomP=freader.getRandomParagraph("./txt/全唐诗.txt");
+// var randomP=freader.getRandomParagraphFromFile("./txt/全唐诗.txt");
+// console.log(randomP);
+
+var randomP=freader.getRandomParagraph();
 console.log(randomP);
+

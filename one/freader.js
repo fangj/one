@@ -61,7 +61,7 @@ function getFileInfo(path){
 }
 
 //随机取得段落
-function getRandomParagraph(path){
+function getRandomParagraphFromFile(path){
 	if(!fileInfos[path]){
 		fileInfos[path]=getFileInfo(path);
 	}
@@ -70,6 +70,7 @@ function getRandomParagraph(path){
 	return getParagraph(path,pos,1000);
 }
 
+//遍历txt目录,把所有文件路径放到fileList数组中
 var fileList = [];
 function walk(path){  
     var dirList = fs.readdirSync(path);
@@ -84,6 +85,7 @@ function walk(path){
 walk('./txt');
 console.log(fileList);  
 
+//收集fileList中所有.txt文件的信息到fileInfos对象中
 function collectTxtFileInfo(fileList){
 	for (var i = 0; i < fileList.length; i++) {
 		var path=fileList[i];
@@ -97,9 +99,29 @@ function collectTxtFileInfo(fileList){
 collectTxtFileInfo(fileList);
 console.log(fileInfos);
 
+function getRandomFile(fileInfos){
+	var fileCount=Object.keys(fileInfos).length;
+	var randomFileIndex=Math.floor(Math.random()*fileCount);
+	var path=Object.keys(fileInfos)[randomFileIndex];
+	// console.log("randomFileIndex",randomFileIndex);
+	return fileInfos[path];
+}
+
+//随机取得目录中一段文本
+function getRandomParagraph(){
+	var fileInfo=getRandomFile(fileInfos);
+	var para=getRandomParagraphFromFile(fileInfo.path);
+	return {
+		path:fileInfo.path,
+		head:fileInfo.head,
+		para:para
+	};
+}
+
 module.exports={
 	getFilesizeInBytes:getFilesizeInBytes,
 	getParagraph:getParagraph,
 	getFileInfo:getFileInfo,
+	getRandomParagraphFromFile:getRandomParagraphFromFile,
 	getRandomParagraph:getRandomParagraph
 };
