@@ -21,6 +21,9 @@
         background: linear-gradient(to bottom,  #ccb785 0%,#dac492 50%,#ccb785 100%);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccb785', endColorstr='#ccb785',GradientType=0 );
     }
+    td {
+        text-align: center;
+    }
     </style>
     <script>
     var _hmt = _hmt || [];
@@ -37,6 +40,15 @@
     <div class="container-fluid" ng-view>
         
     </div>
+    <div>
+        <table style="position: fixed;bottom:0px;width:100%;height:50px;">
+            <tr>
+                <td><a href="#/cover" class="btn btn-info btn-lg" ng-show="showButtonCover">书籍</a></td>
+                <td><button class="btn btn-success btn-lg "  ng-click="one_line()" />一句</td>
+                <td> <button class="btn btn-info btn-lg" ng-click="showMore()" ng-show="showButtonMore"/>更多</td>
+            </tr>
+        </table>
+    </div>
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="//cdn.bootcss.com/angular.js/1.4.5/angular.min.js"></script>
@@ -51,24 +63,31 @@
         otherwise({redirectTo:'/'});
     });
     myapp.controller("main",function($rootScope,$scope,$http){
-    	$scope.p={};
-		$scope.submit=function () {
-            $scope.p.show=false;
+    	$rootScope.p={};
+		$rootScope.one_line=function () {
+            $rootScope.p.show=false;
 			$http.get('/one').success(function(one){
 				$rootScope.one=one;
-                $scope.one.lines=one.para.split("。");
-                $scope.one.line=$scope.one.lines[1];
+                $rootScope.one.lines=one.para.split("。");
+                $rootScope.one.line=$rootScope.one.lines[1];
+                $rootScope.showButtonMore=true;
+                $rootScope.showButtonCover=true;
 			});
 		}
-		$scope.showMore=function  () {
-			$scope.p.show=true;
-		}        
+		$rootScope.showMore=function  () {
+			$rootScope.p.show=true;
+		} 
+        $rootScope.one_line();       
     });
-    myapp.controller("about",function($scope){
+    myapp.controller("about",function($rootScope){
 
     });
-    myapp.controller("cover",function($scope){
-
+    myapp.controller("cover",function($rootScope,$location){
+        $rootScope.showButtonMore=false;
+        $rootScope.showButtonCover=false;
+        $rootScope.one_line=function () {
+            $location.path("/");
+        }
     });
     </script>
 </body>
