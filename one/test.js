@@ -15,3 +15,5 @@ console.log("size",size);
 // freader.getParagraph("./txt/全唐诗.txt",170,10);
 
 // freader.getParagraph("./txt/全唐诗.txt",12193250,100);
+var info=freader.getFileInfo("./txt/全唐诗.txt");
+console.log(info);

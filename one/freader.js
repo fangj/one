@@ -46,7 +46,19 @@ function getParagraph (path,position,length) {
 	return str;
 }
 
+//取得文件信息
+function getFileInfo(path){
+	var len=getFilesizeInBytes(path);
+	var head=getParagraph(path,0,300);
+	return {
+		path:path,
+		len:len,
+		head:head
+	};
+}
+
 module.exports={
 	getFilesizeInBytes:getFilesizeInBytes,
-	getParagraph:getParagraph
+	getParagraph:getParagraph,
+	getFileInfo:getFileInfo
 };
