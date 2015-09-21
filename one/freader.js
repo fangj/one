@@ -2,6 +2,9 @@
 
 var fs=require("fs");
 
+//文件信息
+var fileInfos={};
+
 //取得文件长度
 function getFilesizeInBytes(filename) {
  var stats = fs.statSync(filename);
@@ -55,6 +58,16 @@ function getFileInfo(path){
 		len:len,
 		head:head
 	};
+}
+
+//随机取得段落
+function getRandomParagraph(path){
+	if(!fileInfos[path]){
+		fileInfos[path]=getFileInfo(path);
+	}
+	var info=fileInfos[path];
+	var pos=Math.floor(Math.random()*info.len);
+	return getParagraph(path,pos,300);
 }
 
 module.exports={
