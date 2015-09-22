@@ -18,6 +18,9 @@
         text-align: center;
         font-size: 1.2em;
     }
+    td.active{
+        background-color: #eee;
+    }
 /*    pre{
         background-color: inherit;border:inherit;font-size: 1.2em;
     }*/
@@ -48,7 +51,6 @@
       margin-right: 0.25em;
       vertical-align: -0.4em;
     }
-
     </style>
     <script>
     var _hmt = _hmt || [];
@@ -81,6 +83,7 @@
     });
     myapp.controller("main",function($scope,$http){
 		$scope.line=function () {
+            $scope.current='line';//用于按钮高亮
             $scope.showPara=false;
             $scope.showHead=false;
 			$http.get('/one').success(function(one){
@@ -93,10 +96,12 @@
 			});
 		}
 		$scope.para=function  () {
+            $scope.current='para';//用于按钮高亮
 			$scope.showPara=true;
             $scope.showHead=false;
 		}     
         $scope.head=function  () {
+            $scope.current='head';//用于按钮高亮
             var oPath={path:$scope.one.path};
             $http.post('/one/cover',oPath).success(function(fileInfo){
                 $scope.one.head=fileInfo.head;
