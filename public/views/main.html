@@ -1,22 +1,22 @@
 <div style="padding:20px 20px 100px 20px;">
-<pre ng-show="one.line" style="font-size: 1.5em" class="line">
+    <pre ng-show="one.line" style="font-size: 1.5em" class="line">
 	<blockquote  ng-bind-html="one.line" />
 </pre>
-
-    <div ng-show="showHead">
-    	<a ng-href="{{one.path}}" class="btn btn-lg btn-default" target="_blank">下载</a>
-    	<pre>{{one.head.str}}...</pre>
-    </div>
-    <div  ng-show="showPara" infinite-scroll="nextPara()" infinite-scroll-immediate-check="false">
-    	<pre>...<span ng-bind-html="one.para.str"/>...</pre>
-    	<pre ng-repeat="para in one.paras">{{para.str}}</pre>
+    <div infinite-scroll="nextPara()" infinite-scroll-immediate-check="false">
+        <div ng-show="showHead">
+            <a ng-href="{{one.path}}" class="btn btn-lg btn-default" target="_blank">下载</a>
+            <pre>{{one.head.str}}...</pre>
+        </div>
+        <div ng-show="showPara">
+            <pre>...<span ng-bind-html="one.para.str"/>...</pre>
+            <pre ng-repeat="para in one.paras">{{para.str}}</pre>
+        </div>
     </div>
 </div>
-
- <table style="position: fixed;bottom:0px;width:100%;height:50px;background-color: #DDD">
-            <tr>
-                <td ng-click="head()" ng-show="one.line">首页</td>
-                <td ng-click="line()" style="background-color: lightgray">一句</td>
-                <td ng-click="para()" ng-show="one.line">更多</td>
-            </tr>
+<table style="position: fixed;bottom:0px;width:100%;height:50px;background-color: #DDD">
+    <tr>
+        <td ng-click="head()" ng-show="one.line">首页</td>
+        <td ng-click="line()" style="background-color: lightgray">一句</td>
+        <td ng-click="para()" ng-show="one.line">更多</td>
+    </tr>
 </table>

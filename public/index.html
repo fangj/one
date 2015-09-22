@@ -105,6 +105,9 @@
             });
         } 
         $scope.nextPara=function () {
+            if($scope.showHead){
+                return;
+            }
             if($scope.isLoading){
                 return;
             }
