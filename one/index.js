@@ -15,7 +15,14 @@ function getCover(req,res){
 	res.send(fileInfo);
 }
 
+function getPara(req,res){
+	var reqPara=req.body;
+	var para=freader.getParagraph(reqPara.path,reqPara.pos,reqPara.len);
+	res.send(para);
+}
+
 router.get('/', genOne);
 router.post('/cover', getCover);
+router.post('/para', getPara);
 
 module.exports = router;

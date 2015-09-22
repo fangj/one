@@ -70,8 +70,9 @@
     <script src="//cdn.bootcss.com/angular.js/1.4.5/angular.min.js"></script>
     <script src="//cdn.bootcss.com/angular.js/1.4.5/angular-route.min.js"></script>
     <script src="//cdn.bootcss.com/angular.js/1.4.5/angular-sanitize.min.js"></script>
+    <script src="javascripts/ng-infinite-scroll.min.js"></script>
     <script type="text/javascript">
-    var myapp=angular.module("myapp",['ngRoute','ngSanitize']);
+    var myapp=angular.module("myapp",['ngRoute','ngSanitize','infinite-scroll']);
     myapp.config(function($routeProvider){
         $routeProvider.
         when('/',{controller:'main',templateUrl:'views/main.html'}).
@@ -84,11 +85,11 @@
             $scope.showHead=false;
 			$http.get('/one').success(function(one){
 				$scope.one=one;
-                $scope.one.lines=one.para.split("。");
+                $scope.one.lines=one.para.str.split("。");
                // $scope.one.lines.shift();//去除不完整的句子
                 $scope.one.lines[1]="<em>"+$scope.one.lines[1]+"</em>"; //高亮这一句
                 $scope.one.line=$scope.one.lines[1];
-                $scope.one.para=$scope.one.lines.join("。");
+                $scope.one.para.str=$scope.one.lines.join("。");
 			});
 		}
 		$scope.para=function  () {
@@ -103,6 +104,28 @@
                 $scope.showHead=true;
             });
         } 
+        $scope.nextPara=function () {
+            if($scope.isLoading){
+                return;
+            }
+            $scope.isLoading=true;
+            console.log('nextPara');
+            var lastPos=$scope.one.para.last;
+            if($scope.one.paras){
+                lastPos=$scope.one.paras[$scope.one.paras.length-1].last;
+            }
+            console.log("req",lastPos);
+            var reqPara={path:$scope.one.path,
+                        pos:lastPos,
+                        len:1000};
+            $http.post('/one/para',reqPara).success(function(para){
+                if(!$scope.one.paras){
+                    $scope.one.paras=[];
+                }
+                $scope.one.paras.push(para);
+                $scope.isLoading=false;
+            });
+        }
     });
     </script>
 </body>

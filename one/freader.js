@@ -34,7 +34,11 @@ function buffer2String(buf){
 	//返回从第一个完整字头(包含)到最后一个字头(不包含)之间的字符串.
 	var buf2=buf.slice(first, last);
 	var str = buf2.toString('utf8');
-	return str;
+	return {
+		str:str,
+		first:first,
+		last:last
+	};
 }
 
 
@@ -42,11 +46,16 @@ function buffer2String(buf){
 function getParagraph (path,position,length) {
 	var fd=fs.openSync(path, 'r');
 	var buffer = new Buffer(length);
+	// console.log("getParagraph",path,position,length);
 	var bytesRead=fs.readSync(fd, buffer, 0, length, position);
 	fs.close(fd);
-    var str=buffer2String(buffer.slice(0,bytesRead));
+    var oStr=buffer2String(buffer.slice(0,bytesRead));
     //console.log(str);
-	return str;
+	return {
+		str:oStr.str,
+		first:position+oStr.first,
+		last:position+oStr.last
+	};
 }
 
 //取得文件信息
