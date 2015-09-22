@@ -105,27 +105,35 @@
             });
         } 
         $scope.nextPara=function () {
-            if($scope.showHead){
-                return;
-            }
+            //防止反复调用
             if($scope.isLoading){
                 return;
             }
             $scope.isLoading=true;
+            //准备放段落的容器
+            $scope.one.paras=$scope.one.paras||[];
+            $scope.one.head_paras=$scope.one.head_paras||[];
+
+            //"首页"和"更多",使用不同的容器
+            var paras,lastPos;
+            if($scope.showHead){
+                paras=$scope.one.head_paras;
+                var lastPos=$scope.one.head.last;
+            }else{
+                paras=$scope.one.paras;
+                var lastPos=$scope.one.para.last;
+            }
+            //取得段落内容
             console.log('nextPara');
-            var lastPos=$scope.one.para.last;
-            if($scope.one.paras){
-                lastPos=$scope.one.paras[$scope.one.paras.length-1].last;
+            if(paras.length>0){
+                lastPos=paras[paras.length-1].last;
             }
             console.log("req",lastPos);
             var reqPara={path:$scope.one.path,
                         pos:lastPos,
                         len:1000};
             $http.post('/one/para',reqPara).success(function(para){
-                if(!$scope.one.paras){
-                    $scope.one.paras=[];
-                }
-                $scope.one.paras.push(para);
+                paras.push(para);
                 $scope.isLoading=false;
             });
         }

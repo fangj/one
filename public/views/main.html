@@ -6,6 +6,7 @@
         <div ng-show="showHead">
             <a ng-href="{{one.path}}" class="btn btn-lg btn-default" target="_blank">下载</a>
             <pre>{{one.head.str}}...</pre>
+            <pre ng-repeat="para in one.head_paras">{{para.str}}</pre>
         </div>
         <div ng-show="showPara">
             <pre>...<span ng-bind-html="one.para.str"/>...</pre>
