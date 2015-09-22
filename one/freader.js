@@ -52,7 +52,7 @@ function getParagraph (path,position,length) {
 //取得文件信息
 function getFileInfo(path){
 	var len=getFilesizeInBytes(path);
-	var head=getParagraph(path,0,300);
+	var head=getParagraph(path,0,1000);
 	return {
 		path:path,
 		len:len,
@@ -113,7 +113,6 @@ function getRandomParagraph(){
 	var para=getRandomParagraphFromFile(fileInfo.path);
 	return {
 		path:fileInfo.path,
-		head:fileInfo.head,
 		para:para
 	};
 }
@@ -123,5 +122,5 @@ module.exports={
 	getParagraph:getParagraph,
 	getFileInfo:getFileInfo,
 	getRandomParagraphFromFile:getRandomParagraphFromFile,
-	getRandomParagraph:getRandomParagraph
+	getRandomParagraph:getRandomParagraph,
 };

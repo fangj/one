@@ -1,7 +1,13 @@
-<div ng-show="one.line" >
-    <pre style="background-color: inherit;border:inherit;font-size: 1.5em">{{one.line}}</pre>
-    <div ng-show="p.show">
-        <pre style="background-color: inherit;border:inherit;font-size: 1.2em">...{{one.para}}...</pre>
-        <div style="height:50px"></div>
-    </div>
+<div >
+    <pre style="font-size: 1.5em">{{one.line}}</pre>
+    <pre ng-show="showHead">{{one.head}}...</pre>
+    <pre ng-show="showPara">...{{one.para}}...</pre>
+
+      <table style="position: fixed;bottom:0px;width:100%;height:50px;">
+            <tr>
+                <td><button class="btn btn-info btn-lg" ng-show="one.line" ng-click="head()">首页</button></td>
+                <td><button class="btn btn-success btn-lg "  ng-click="line()" >一句</button></td>
+                <td> <button class="btn btn-info btn-lg" ng-show="one.line" ng-click="para()" >更多</button></td>
+            </tr>
+        </table>
 </div>
