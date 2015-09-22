@@ -6,15 +6,18 @@ http://one.treenote.net/
 ![qrcode](screenshot/qrcode_one.png)
 
 ### 这是什么?
-"一句"是一个超轻的阅读应用,从大量文字中随手翻出一句.
-![screenshot/one1.jpg](screenshot/one1.jpg)
-![screenshot/one2.jpg](screenshot/one2.jpg)
-![screenshot/one3.jpg](screenshot/one3.jpg)
+"一句"是一个超轻的阅读应用,从大量文字中随手翻出一句.  
 
-看到喜欢的句子,可以就地展开,或者从头阅读
-![screenshot/one1.jpg](screenshot/one1.jpg)
-![screenshot/more1.jpg](screenshot/more1.jpg)
-![screenshot/head1.jpg](screenshot/head1.jpg)
+<img src="screenshot/one1.jpg" width="200">
+<img src="screenshot/one2.jpg" width="200">
+<img src="screenshot/one3.jpg" width="200">
+
+
+看到喜欢的句子,可以就地展开,或者从头阅读  
+
+<img src="screenshot/one1.jpg" width="200">
+<img src="screenshot/more1.jpg" width="200">
+<img src="screenshot/head1.jpg" width="200">
 
 
 ### 灵感
