@@ -23,7 +23,7 @@
     }*/
     pre {
         width: 100%; margin: 30px auto; background: #222; padding: 20px;
-        font-size: 22px; color: #666; text-shadow: 0px 2px 3px #171717;
+        font-size: 1.5em; color: #666; text-shadow: 0px 1px 2px #171717;
         
         -webkit-box-shadow: 0px 2px 3px #666;
         -moz-box-shadow: 0px 2px 3px #666;
@@ -32,7 +32,7 @@
         
     }
 
-    .line{
+    em,.line{
         color: #999; text-shadow: 0px 1px 3px #2a2a2a;
     }
     </style>
@@ -55,8 +55,9 @@
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="//cdn.bootcss.com/angular.js/1.4.5/angular.min.js"></script>
     <script src="//cdn.bootcss.com/angular.js/1.4.5/angular-route.min.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.4.5/angular-sanitize.min.js"></script>
     <script type="text/javascript">
-    var myapp=angular.module("myapp",['ngRoute']);
+    var myapp=angular.module("myapp",['ngRoute','ngSanitize']);
     myapp.config(function($routeProvider){
         $routeProvider.
         when('/',{controller:'main',templateUrl:'views/main.html'}).
@@ -70,7 +71,10 @@
 			$http.get('/one').success(function(one){
 				$scope.one=one;
                 $scope.one.lines=one.para.split("。");
+               // $scope.one.lines.shift();//去除不完整的句子
+                $scope.one.lines[1]="<em>"+$scope.one.lines[1]+"</em>"; //高亮这一句
                 $scope.one.line=$scope.one.lines[1];
+                $scope.one.para=$scope.one.lines.join("。");
 			});
 		}
 		$scope.para=function  () {

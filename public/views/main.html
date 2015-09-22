@@ -1,10 +1,10 @@
 <div style="padding:20px 20px 100px 20px;">
-    <pre ng-show="one.line" style="font-size: 1.5em" class="line">{{one.line}}</pre>
+    <pre ng-show="one.line" style="font-size: 1.5em" class="line" ng-bind-html="one.line"></pre>
     <div ng-show="showHead">
     	<pre>{{one.head}}...</pre>
     	<a ng-href="{{one.path}}" class="btn btn-lg btn-default" target="_blank">下载</a>
     </div>
-    <pre ng-show="showPara">...{{one.para}}...</pre>
+    <pre ng-show="showPara"><span ng-bind-html="one.para"/>...</pre>
 </div>
 
  <table style="position: fixed;bottom:0px;width:100%;height:50px;background-color: #DDD">
