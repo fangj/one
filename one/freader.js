@@ -122,6 +122,7 @@ function getRandomParagraph(){
 	var para=getRandomParagraphFromFile(fileInfo.path);
 	return {
 		path:fileInfo.path,
+		len:fileInfo.len,
 		para:para
 	};
 }

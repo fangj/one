@@ -110,6 +110,7 @@
                 return;
             }
             $scope.isLoading=true;
+
             //准备放段落的容器
             $scope.one.paras=$scope.one.paras||[];
             $scope.one.head_paras=$scope.one.head_paras||[];
@@ -124,9 +125,15 @@
                 var lastPos=$scope.one.para.last;
             }
             //取得段落内容
-            console.log('nextPara');
+            //console.log('nextPara');
             if(paras.length>0){
                 lastPos=paras[paras.length-1].last;
+            }
+            //如果已经到文章末尾,直接返回
+            //console.log(lastPos,$scope.one.len);
+            if(lastPos>=$scope.one.len-1){
+                $scope.isLoading=false;
+                return;
             }
             console.log("req",lastPos);
             var reqPara={path:$scope.one.path,
