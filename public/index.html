@@ -81,8 +81,9 @@
     <script src="//cdn.bootcss.com/angular.js/1.4.5/angular-route.min.js"></script>
     <script src="//cdn.bootcss.com/angular.js/1.4.5/angular-sanitize.min.js"></script>
     <script src="javascripts/ng-infinite-scroll.min.js"></script>
+    <script src="javascripts/dirDisqus.js"></script>
     <script type="text/javascript">
-    var myapp=angular.module("myapp",['ngRoute','ngSanitize','infinite-scroll']);
+    var myapp=angular.module("myapp",['ngRoute','ngSanitize','infinite-scroll','angularUtils.directives.dirDisqus']);
     myapp.config(function($routeProvider){
         $routeProvider.
         when('/',{controller:'main',templateUrl:'views/main.html'}).
@@ -158,6 +159,7 @@
             });
         }
     });
+    myapp.controller("about",function($scope,$http){});
     </script>
 </body>
 
